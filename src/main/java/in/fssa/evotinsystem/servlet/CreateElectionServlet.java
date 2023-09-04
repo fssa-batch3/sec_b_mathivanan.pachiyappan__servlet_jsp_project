@@ -30,7 +30,7 @@ public class CreateElectionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     String electionName = request.getParameter("name");
-    String dateString = request.getParameter("date");
+    String electionDate = request.getParameter("date");
     String boothAddress = request.getParameter("booth_address");
     String talukId = request.getParameter("taluk_number");
 
@@ -40,7 +40,7 @@ public class CreateElectionServlet extends HttpServlet {
     try {
         // Parse the date string into LocalDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dateString, formatter);
+        LocalDate date = LocalDate.parse(electionDate, formatter);
         election.setElectionDate(date);
 
         election.setBoothAddress(boothAddress);

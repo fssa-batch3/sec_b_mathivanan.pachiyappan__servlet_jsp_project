@@ -77,13 +77,14 @@ button[type="submit"]:hover {
 
 </style>
 </head>
+
 <body>
 <% Election election = new Election(); %>
 <% election = (Election)request.getAttribute("elections"); %>
 <%String elc_id = (String)request.getAttribute("id"); %>
 <%int id = Integer.parseInt(elc_id); %>
 
-	<form action="update?id=<%=id%>" method="post">
+	<form action="update?id=<%=id%>" method="POST">
 	    <label>Election Name: </label>
 		<input type="text" name="name" required value = "<%=election.getElectionName()%>"/> 
 		<label>Election Date: </label>

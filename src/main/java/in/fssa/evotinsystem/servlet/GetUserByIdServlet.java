@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.protobuf.ServiceException;
-
+import in.fssa.evotingsystem.exception.ServiceException;
 import in.fssa.evotingsystem.exception.ValidationException;
 import in.fssa.evotingsystem.model.User;
 import in.fssa.evotingsystem.service.UserService;
@@ -39,7 +38,9 @@ public class GetUserByIdServlet extends HttpServlet {
 			
 			User user=new User();
 			
-			user=userService.findByUserId(id2);
+			
+				user=userService.findByUserId(id2);
+			
 			
 			  request.setAttribute("user", user);
 
