@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Elections</title>
+<title>Update Candidates</title>
 <style>
 /* Apply some basic styling to the body */
 body {
@@ -90,6 +90,8 @@ button[type="submit"]:hover {
 		<input type="number" name="election_number" required value = "<%=candidate.getElectionId() %>" readonly/>
 		<label>Candidate Name: </label>
 		<input type="text" name="candidate_name" required value = "<%=candidate.getCandidateName() %>" />
+		<label>Account Created: </label>
+		<input type="date" name="created_at" value = "<%=candidate.getCreatedAt() %>" readonly/>
 		<button type="submit">Submit</button>
 	</form>
 </body>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Elections</title>
+<title>Update Elections</title>
 <style>
 /* Apply some basic styling to the body */
 body {

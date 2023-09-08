@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Election List</title>
+<title>Candidates List</title>
 
 <style>
   body {
@@ -79,6 +79,8 @@ List<Candidate> candidateList = newCandidate.getAllCandidates();
         <tr>
             <th>Candidate Reg.No</th>
             <th>Election Number</th>
+            <th>Party Symbol</th>
+            <th>Party Name</th>
             <th>Candidate Name</th>
             <th>Account Created</th>
         </tr>
@@ -86,9 +88,11 @@ List<Candidate> candidateList = newCandidate.getAllCandidates();
     <tbody>
         <% for (Candidate candidate : candidateList) { %>
         <tr>
-            <td><%= candidate.getCandidateId() %></td>
+            <td><img src="<%=candidate.getImageUrl() %>" alt ="party_symbols" style ="max-width: 7rem;"/></td>
+            <td><%= candidate.getPartyName() %></td>
+            <td><%= candidate.getUserId() %></td>
             <td><%= candidate.getElectionId() %></td>
-            <td><%= candidate.getCandidateName() %></td>
+            <td><%= candidate.getName() %></td>
             <td><%= candidate.getCreatedAt() %></td>
             <td><a href="candidate/edit?id=<%=candidate.getId()%>"><button class = "updateBtn">Edit</button></a></td>
             <td><a href="candidate/delete?id=<%=candidate.getId()%>"><button class = "deleteBtn">Delete</button></a></td>

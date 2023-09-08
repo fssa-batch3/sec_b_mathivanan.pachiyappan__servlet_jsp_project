@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User List</title>
+<title>Users List</title>
 
 <style>
 body {

@@ -2,6 +2,7 @@ package in.fssa.evotinsystem.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,51 +14,55 @@ import in.fssa.evotingsystem.exception.ValidationException;
 import in.fssa.evotingsystem.model.User;
 import in.fssa.evotingsystem.service.UserService;
 
-
 /**
  * Servlet implementation class AddElections
  */
-@WebServlet("/user/create")
+@WebServlet("/create")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/user_register.jsp");
+		dispatcher.forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    String phoneNumber = request.getParameter("phone_number");
-    String password = request.getParameter("password");
-    String address = request.getParameter("address");
-    String voterId = request.getParameter("voter_number");
-    String talukId = request.getParameter("taluk_number");
+			throws ServletException, IOException {
+		String phoneNumber = request.getParameter("phone_number");
+		String password = request.getParameter("password");
+		String address = request.getParameter("address");
+		String voterId = request.getParameter("voter_number");
+		String talukId = request.getParameter("taluk_number");
 
-    User user = new User();
-    user.setPhoneNumber(Long.parseLong(phoneNumber));
+		User user = new User();
+		user.setPhoneNumber(Long.parseLong(phoneNumber));
+		user.setPassword(password);
+		user.setAddress(address);
+		user.setVoterId(Integer.parseInt(voterId));
+		user.setTalukId(Integer.parseInt(talukId));
 
-    try {
-      
-    	user.setPassword(password);
-    	user.setAddress(address);
-    	user.setVoterId(Integer.parseInt(voterId));
-    	user.setTalukId(Integer.parseInt(talukId));
+		UserService userService = new UserService();
 
-        UserService userService = new UserService();
-        try {
+		try {
+			
+
 			userService.createUser(user);
+
+			response.sendRedirect(request.getContextPath() + "/userlogin");
+
+		}  catch (ValidationException e) {
+			e.printStackTrace();
+			throw new ServletException(e.getMessage());
 		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-        response.sendRedirect(request.getContextPath()+ "/users"); 
-        
-    } catch (NumberFormatException e) {
-        e.printStackTrace();
-        throw new ServletException("Invalid taluk ID. Please provide a valid integer.");
-    } catch ( ValidationException e) {
-        e.printStackTrace();
-        throw new ServletException(e.getMessage());
-    }
-}
+	}
 
 }

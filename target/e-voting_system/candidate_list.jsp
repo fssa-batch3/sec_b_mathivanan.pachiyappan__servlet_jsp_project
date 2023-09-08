@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Election List</title>
+<title>Candidates List</title>
 
 <style>
   body {

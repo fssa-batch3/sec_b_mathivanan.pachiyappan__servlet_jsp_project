@@ -27,10 +27,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		Candidate candidate = new Candidate();
 //		PrintWriter out = response.getWriter();
 		
-		candidate.setCandidateName(request.getParameter("candidate_name"));
-		candidate.setCreatedAt(LocalDate.parse(request.getParameter("created_at")));
-		candidate.setCandidateId(Integer.parseInt(request.getParameter("candidate_regNo")));
-		candidate.setElectionId(Integer.parseInt(request.getParameter("election_number")));
+		candidate.setName(request.getParameter("candidateName"));
+		candidate.setPartyName(request.getParameter("partyName"));
+		candidate.setImageUrl(request.getParameter("imageUrl"));
+		candidate.setCreatedAt(LocalDate.parse(request.getParameter("createdAt")));
+		candidate.setUserId(Integer.parseInt(request.getParameter("candidateRegNo")));
+		candidate.setElectionId(Integer.parseInt(request.getParameter("electionId")));
 		
 		try {
 			candidateService.updateCandidate(id, candidate);

@@ -31,6 +31,7 @@ public class UpdateUserServlet extends HttpServlet {
 		User user = new User();
 //		PrintWriter out = response.getWriter();
 	
+		user.setPhoneNumber(Long.parseLong(request.getParameter("phone_number")));
 		user.setPassword(request.getParameter("password"));
 		user.setAddress(request.getParameter("address"));
 		user.setTalukId(Integer.parseInt(request.getParameter("taluk_number")));

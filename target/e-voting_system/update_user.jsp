@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Elections</title>
+<title>Update Users</title>
 <style>
 /* Apply some basic styling to the body */
 body {
@@ -42,6 +42,26 @@ input[type="number"] {
     border-radius: 3px;
     margin-bottom: 15px;
     font-size: 14px;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
 input[type="date"] {
@@ -87,9 +107,9 @@ button[type="submit"]:hover {
 	    <label>Phone Number: </label>
 		<input type="tel" name="phone_number" required value = "<%=user.getPhoneNumber() %>" readonly/> 
 		<label>Password: </label>
-		<input type="password" name="password" required value = "<%=user.getPassword() %>" />
+		<input type="password" name="password" required value = "<%=user.getPassword() %>"/>
 		<label>Address: </label> 
-		<input type="text" name="address" required value = "<%=user.getAddress() %>" />
+		<input type="text" name="address" required value = "<%=user.getAddress() %>"/>
 		<label>Voter Id: </label>
 		<input type="number" name="voter_number" required value = "<%=user.getVoterId() %>" readonly/>
 		<label>Taluk Id: </label>

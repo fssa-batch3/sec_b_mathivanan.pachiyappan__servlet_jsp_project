@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Election List</title>
+<title>Users List</title>
 
 <style>
 body {
@@ -80,6 +80,7 @@ button.deleteBtn {
 		<thead>
 			<tr>
 				<th>Phone Number</th>
+				<th>Password</th>
 				<th>Address</th>
 				<th>Voter Id</th>
 			</tr>
@@ -90,6 +91,7 @@ button.deleteBtn {
 			%>
 			<tr>
 				<td><%=user.getPhoneNumber() %></td>
+				<td><%=user.getPassword() %></td>
 				<td><%=user.getAddress() %></td>
 				<td><%=user.getVoterId() %></td>
 				<td><a href="user/edit?id=<%=user.getId()%>"><button

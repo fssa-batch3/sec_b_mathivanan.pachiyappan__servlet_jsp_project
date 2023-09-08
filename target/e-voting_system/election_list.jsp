@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Election List</title>
+<title>Elections List</title>
 
 <style>
   body {
@@ -88,6 +88,7 @@ List<Election> electionList = newElection.getAllElections();
             <td><%= election.getElectionName() %></td>
             <td><%= election.getElectionDate() %></td>
             <td><%= election.getBoothAddress() %></td>
+            
             <td><a href="election/edit?id=<%=election.getId()%>"><button class = "updateBtn">Edit</button></a></td>
             <td><a href="election/delete?id=<%=election.getId()%>"><button class = "deleteBtn">Delete</button></a></td>
         </tr>

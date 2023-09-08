@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class NewUserServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requ = request.getRequestDispatcher("/add_user.jsp");
+		RequestDispatcher requ = request.getRequestDispatcher("/user_register.jsp");
 		requ.forward(request, response);
 	}
 

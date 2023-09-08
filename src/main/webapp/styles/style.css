@@ -1,0 +1,259 @@
+* {
+    margin: 0rem;
+    border: 0rem;
+}
+
+body {
+    background-color: white;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    margin: 0rem;
+    width: 100%;
+    padding: 0px 2px 0px 2px;
+    position: fixed;
+    z-index: 1;
+}
+
+div.main {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    text-align: left;
+    top: 1;
+}
+
+div.side_text {
+    width: 50%;
+    text-align: center;
+    margin-right: 3rem;
+}
+
+/* Basic styling for the gallery container */
+.partners {
+    width: 100%;
+    overflow: hidden;
+    margin: 1rem;
+}
+
+/* Styling for the image gallery */
+.image-gallery {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* overflow-x: auto; */
+    /* Allow horizontal scrolling */
+    /* scroll-behavior: smooth; */
+    /* Enable smooth scrolling */
+    animation: scroll 35s linear infinite;
+    /* Auto-scroll animation */
+}
+
+/* Style for individual images */
+.background {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    /* Adjust spacing between images */
+}
+
+/* Keyframe animation for auto-scrolling */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+        /* Start from the beginning */
+    }
+
+    100% {
+        transform: translateX(-100%);
+        /* Scroll to the end */
+    }
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+button.index_vtbtn {
+    color: white;
+    background-color: #fb4947;
+    padding: 10px 30px 10px 30px;
+    font-size: 120%;
+    border-radius: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, ;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+p a{
+	text-decoration: none;
+}
+iframe {
+    width: 100%;
+    height: 50rem;
+}
+p.side_text {
+    font-size: 95%;
+    line-height: 2rem;
+    text-align: left;
+}
+
+h2 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #577a70;
+}
+
+div.partners img {
+    width: 10%;
+    /* height: 10%; */
+}
+
+div.body_bg img {
+    margin-top: 4rem;
+    width: 100%;
+    max-height: 10%;
+}
+
+div.main {
+    background-image: linear-gradient(#7cf8d6, #d4fff6);
+}
+
+div.main img {
+    margin-top: 5rem;
+    width: 50%;
+    max-height: 10%;
+}
+
+div.icons img {
+    display: flex;
+    flex-direction: row;
+    object-fit: cover;
+    max-width: 100%;
+    padding-top: -10em;
+    text-align: center;
+    margin: -0.5rem;
+    top: 1;
+}
+
+p.footer_text {
+    text-align: center;
+    background-color: black;
+    margin: 0rem;
+    padding: 2rem;
+    color: white;
+}
+
+
+header button {
+    margin-right: 1.5rem;
+    padding: 7px 20px 7px 20px;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: white;
+    font-size: 98%;
+}
+
+button {
+    color: black;
+}
+
+header button:hover {
+    margin-right: 1.5rem;
+    padding: 10px 30px 10px 30px;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 98%;
+    cursor: pointer;
+}
+
+div.body_cnt {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 280%;
+    text-align: left;
+}
+
+ul {
+    border-bottom-left-radius: 10rem;
+}
+
+ul li {
+    text-align: justify;
+    margin-bottom: 0.6rem;
+    font-size: 90%;
+    font-weight: bold;
+    width: 80%;
+    font-family: sans-serif;
+    color: black;
+}
+
+ul p {
+    background-color: antiquewhite;
+    padding: 1rem;
+}
+
+div p {
+    font-family: sans-serif;
+    text-align: justify;
+    margin: 1rem;
+}
+
+div.logo_text {
+    display: flex;
+    flex-direction: row;
+    font-size: 150%;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    margin-left: 0rem;
+    padding: 4px 6px 4px 6px;
+}
+
+div.logo_text p {
+    margin-left: 1rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+div.logo_text p.header_text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 180%;
+    color: aliceblue;
+    font-weight: bold;
+    margin-left: 20rem;
+}
+
+/* div#google_element {
+    margin-right: 1rem;
+    background-color: white;
+    border-radius: 5px;
+} */
+
+/* Apply styles to the container div */
+
+/* Style for the background image */
+.background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the image covers the entire container */
+}
