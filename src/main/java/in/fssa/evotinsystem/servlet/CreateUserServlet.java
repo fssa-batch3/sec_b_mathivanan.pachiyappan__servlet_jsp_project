@@ -62,6 +62,7 @@ public class CreateUserServlet extends HttpServlet {
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new ServletException(e.getMessage());
 		}
 	}
 

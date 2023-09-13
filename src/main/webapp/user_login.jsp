@@ -99,11 +99,13 @@
 
     <div class="login-container">
         <h2>Login</h2>
+        
         <c:if test="${not empty errorMessage}">
           <p style="color: #85a88c; font-weight: bold; text-align: center; background-color: #d4edda; 
           border-radius: 4px; padding: 0.5rem;">
           ${errorMessage}</p>
         </c:if>
+        
         <form action="userlogin" method="post">
         <div class="input-container">
             <i class="fas fa-mobile"></i>
@@ -119,7 +121,7 @@
         </form>
     </div>
     <!-- <script src="https://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script> -->
-    <script src="./assets/js/main.js"></script>
-</body>
+    <!--  <script src="./assets/js/main.js"></script>
+</body>-->
 
 </html>
