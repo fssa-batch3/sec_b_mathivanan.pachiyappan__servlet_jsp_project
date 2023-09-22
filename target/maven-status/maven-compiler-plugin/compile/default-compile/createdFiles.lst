@@ -1,0 +1,11 @@
+in\fssa\evotinsystem\servlet\AdminLogoutServlet.class
+in\fssa\evotinsystem\servlet\UserLogoutServlet.class
+in\fssa\evotinsystem\servlet\ListCandidateServlet.class
+in\fssa\evotinsystem\servlet\SelectElectionServlet.class
+in\fssa\evotinsystem\servlet\UserProfileServlet.class
+in\fssa\evotinsystem\servlet\IndexServlet.class
+in\fssa\evotinsystem\servlet\NewElectionServlet.class
+in\fssa\evotinsystem\servlet\NewUserServlet.class
+in\fssa\evotinsystem\servlet\NewCandidateServlet.class
+in\fssa\evotinsystem\servlet\ListElectionServlet.class
+in\fssa\evotinsystem\servlet\ListUserServlet.class

@@ -28,6 +28,7 @@ public class CreateCandidateServlet extends HttpServlet {
         String electionId = request.getParameter("electionId");
         String partyName = request.getParameter("partyName");
         String imageUrl = request.getParameter("imageUrl");
+        String candidatePicture = request.getParameter("profilePic");
         String createdAt = request.getParameter("createdAt");
 
         Candidate candidate = new Candidate();
@@ -36,6 +37,7 @@ public class CreateCandidateServlet extends HttpServlet {
         candidate.setElectionId(Integer.parseInt(electionId));
         candidate.setPartyName(partyName);
         candidate.setImageUrl(imageUrl);
+        candidate.setProfilePic(candidatePicture);
 
         try {
             // Parse the date string into LocalDate

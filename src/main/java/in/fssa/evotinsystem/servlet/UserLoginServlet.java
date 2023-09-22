@@ -46,6 +46,7 @@ public class UserLoginServlet extends HttpServlet {
             // Authentication successful
             HttpSession session = request.getSession();
             session.setAttribute("loggedUser", user); // Store the user object in the session
+            System.out.println("Storing loggedUser:" + user);
             System.out.println("Succcess");
             response.sendRedirect(request.getContextPath() + "/index");
             

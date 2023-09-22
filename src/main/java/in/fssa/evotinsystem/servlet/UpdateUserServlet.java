@@ -19,31 +19,29 @@ import in.fssa.evotingsystem.service.UserService;
  */
 @WebServlet("/user/update")
 public class UpdateUserServlet extends HttpServlet {
-	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int id = Integer.parseInt(request.getParameter("id"));
-		UserService userService = new UserService();
-		User user = new User();
-//		PrintWriter out = response.getWriter();
-	
-		user.setPhoneNumber(Long.parseLong(request.getParameter("phone_number")));
-		user.setPassword(request.getParameter("password"));
-		user.setAddress(request.getParameter("address"));
-		user.setTalukId(Integer.parseInt(request.getParameter("taluk_number")));
-		
-		try {
-			userService.updateUser(id, user);
-			
-			response.sendRedirect(request.getContextPath() + "/users");
-		}catch(ValidationException | ServiceException e) {
-			e.printStackTrace();
-			throw new ServletException(e.getMessage());
-		}
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserService userService = new UserService();
+        User user = new User();
+
+        user.setPhoneNumber(Long.parseLong(request.getParameter("phone_number")));
+        user.setPassword(request.getParameter("password"));
+        user.setAddress(request.getParameter("address"));
+        user.setTalukId(Integer.parseInt(request.getParameter("taluk_number")));
+
+        try {
+            userService.updateUser(id, user);
+
+            // Redirect to the user's profile page after updating.
+            response.sendRedirect(request.getContextPath() + "/users");
+
+        } catch (ValidationException | ServiceException e) {
+            e.printStackTrace();
+            throw new ServletException(e.getMessage());
+        }
+    }
 }
+

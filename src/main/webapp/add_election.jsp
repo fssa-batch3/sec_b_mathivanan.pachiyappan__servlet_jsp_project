@@ -6,6 +6,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Elections</title>
+<link rel="stylesheet" href="./styles/style.css">
+<link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
+<link rel="stylesheet" href="./styles/interactive-style.css">
+<!--Header JSP-->
+<jsp:include page="header.jsp" />
+
 <style>
 /* Apply some basic styling to the body */
 body {
@@ -13,6 +19,19 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+}
+
+header {
+	margin-top: -7rem;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 7rem;
+}
+
+p.footer_text {
+	position: fixed;
 }
 
 /* Style the form container */
@@ -77,6 +96,8 @@ button[type="submit"]:hover {
 </style>
 </head>
 <body>
+    
+	<h1>Add New Election</h1>
 	<form action="create" method="POST">
 	    <label>Election Name: </label>
 		<input type="text" name="name" required /> 
@@ -88,5 +109,10 @@ button[type="submit"]:hover {
 		<input type="number" name="taluk_number" required />
 		<button type="submit">Submit</button>
 	</form>
+	
+	<div class="icons">
+		<p class="footer_text">© Copyright BallotBox.com All rights
+			reserved 2023</p>
+	</div>
 </body>
 </html>

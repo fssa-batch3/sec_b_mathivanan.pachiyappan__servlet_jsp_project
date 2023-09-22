@@ -7,6 +7,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Update Elections</title>
+<link rel="stylesheet" href="./styles/style.css">
+<link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
+<link rel="stylesheet" href="./styles/interactive-style.css">
+<!--Header JSP-->
+<jsp:include page="header.jsp" />
+
 <style>
 /* Apply some basic styling to the body */
 body {
@@ -14,6 +20,22 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+}
+
+header {
+	margin-top: -7rem;
+}
+
+h1 {
+	text-align: center;
+	background-color: #007bff;
+	color: #fff;
+	padding: 10px;
+	margin-top: 7rem;
+}
+
+p.footer_text {
+	position: fixed;
 }
 
 /* Style the form container */
@@ -79,6 +101,8 @@ button[type="submit"]:hover {
 </head>
 
 <body>
+
+<h1>Update Election</h1>
 <% Election election = new Election(); %>
 <% election = (Election)request.getAttribute("elections"); %>
 <%String elc_id = (String)request.getAttribute("id"); %>
@@ -95,5 +119,10 @@ button[type="submit"]:hover {
 		<input type="number" name="taluk_number" readonly value = "<%=election.getTalukId() %>"/>
 		<button type="submit">Submit</button>
 	</form>
+	
+	<div class="icons">
+		<p class="footer_text">© Copyright BallotBox.com All rights
+			reserved 2023</p>
+	</div>
 </body>
 </html>

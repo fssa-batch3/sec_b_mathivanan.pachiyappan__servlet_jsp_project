@@ -12,6 +12,11 @@
 <link rel="stylesheet" href="./styles/style.css">
 <link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
 <link rel="stylesheet" href="./styles/interactive-style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Header JSP-->
+<jsp:include page="header.jsp" />
+
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -20,8 +25,12 @@ body {
 	padding: 0;
 }
 
+p.footer_text {
+    position: fixed;
+}
+
 header {
-    margin-top: -7rem;
+	margin-top: -7rem;
 }
 
 h1 {
@@ -32,6 +41,7 @@ h1 {
 table {
 	width: 80%;
 	margin: 20px auto;
+	margin-bottom: 10rem;
 	border-collapse: collapse;
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 	background-color: #ffffff;
@@ -71,43 +81,27 @@ button.deleteBtn {
 	padding: 0.5rem;
 	border-radius: 5px;
 }
+
+.add_new a {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	text-align: center;
+	text-decoration: none;
+	position: fixed;
+	font-size: 110%;
+	top: 1;
+	color: white;
+	background-image: linear-gradient(blueviolet, #ff589e);
+	padding: 0.3em;
+	width: 7%;
+	border-bottom-right-radius: 1em;
+	border-top-right-radius: 1em;
+}
 </style>
 </head>
 <body>
-
-	<%
-	if (session.getAttribute("loggedUser") == null) {
-	%>
-	<header>
-		<div class="logo_text">
-			<img src="./images/bb_logo.png" alt="e_commison-logo" width="10%"
-				height="10%" style="border-radius: 1.5rem;" /> <a
-				href="./index.html">
-				<p>BallotBox</p>
-			</a>
-		</div>
-
-		<div>
-			<a href="<%=request.getContextPath() + "/userlogin"%>"><button>Sign-In</button></a>
-		</div>
-	</header>
-	<%
-	} else {
-	%>
-	<!-- Header after login -->
-	<header>
-		<div class="logo_text">
-			<img src="./images/bb_logo.png" alt="e_commison-logo" width="10%"
-				height="10%" style="border-radius: 1.5rem;" /> <a
-				href="./index.html">
-				<p>BallotBox</p>
-			</a>
-		</div>
-
-	</header>
-	<%
-	}
-	%>
 
 	<h1>Election List</h1>
 
@@ -116,7 +110,11 @@ button.deleteBtn {
 	List<Election> electionList = newElection.getAllElections();
 	%>
 
-    <h2>Select Election</h2>
+	<h2>Select Election</h2>
+	<p class="add_new">
+		<a href="<%=request.getContextPath() + "/election/new"%>">Add New<i
+			class="fa fa-plus-circle"></i></a>
+	</p>
 	<table>
 		<thead>
 			<tr>
@@ -144,6 +142,10 @@ button.deleteBtn {
 			%>
 		</tbody>
 	</table>
+	<div class="icons">
+		<p class="footer_text">© Copyright BallotBox.com All rights
+			reserved 2023</p>
+	</div>
 
 </body>
 </html>

@@ -8,55 +8,21 @@
 <link rel="stylesheet" href="./styles/style.css">
 <link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
 <link rel="stylesheet" href="./styles/interactive-style.css">
+<!--Header JSP-->
+<jsp:include page="header.jsp" />
 </head>
 
 <body>
-	<!-- Header before login -->
-	<%
-	if (session.getAttribute("loggedUser") == null) {
-	%>
-	<header>
-		<div class="logo_text">
-			<img src="./images/bb_logo.png" alt="e_commison-logo" width="10%"
-				height="10%" style="border-radius: 1.5rem;" /> <a
-				href="<%=request.getContextPath() + "/index" %>">
-				<p>BallotBox</p>
-			</a>
-		</div>
-
-		<div>
-			<a href="<%=request.getContextPath() + "/userlogin"%>"><button>Sign-In</button></a>
-		</div>
-	</header>
-	<%
-	} else {
-	%>
-	<!-- Header after login -->
-	<header>
-		<div class="logo_text">
-			<img src="./images/bb_logo.png" alt="e_commison-logo" width="10%"
-				height="10%" style="border-radius: 1.5rem;" /> <a
-				href="<%=request.getContextPath() + "/index" %>">
-				<p>BallotBox</p>
-			</a>
-		</div>
-
-		<div>
-			<a href="<%=request.getContextPath() + "/select"%>"><button>Elections</button></a> 
-			<a href="<%=request.getContextPath() + "/profile"%>"><button>Profile</button></a> 
-			<a href="<%=request.getContextPath() + "/userlogout"%>"><button>Logout</button></a>
-		</div>
-	</header>
-	<%
-	}
-	%>
 
 	<!-- <div class="body_bg">
         <img src="./assets/images/background.jpg" alt="background" class="background" />
     </div> -->
 
-	<div class="main">
+	<%
+	 if (session.getAttribute("loggedUser") != null || session.getAttribute("loggedAdmin") == null){
+	%>
 
+	<div class="main">
 
 		<img src="./images/landing_page_img.png" alt="index_bg" />
 		<div class="side_text" style="margin-top: 10rem;">
@@ -67,18 +33,18 @@
 				participate in elections, making it easier and more accessible than
 				ever before. Join us in shaping the future of civic engagement as we
 				bring the power of the ballot to your fingertips."</p>
-		    
-		     <%
+
+			<%
 	         if (session.getAttribute("loggedUser") == null) {
 	         %>
 			<a href="<%=request.getContextPath() + "/userlogin"%>"><button
 					class="index_vtbtn">Vote now</button></a>
-		     <%
+			<%
 	         } else {
 	         %>
-	         <a href="<%=request.getContextPath() + "/select"%>"><button
+			<a href="<%=request.getContextPath() + "/select"%>"><button
 					class="index_vtbtn">Vote now</button></a>
-	         <%
+			<%
 	         }
 	         %>
 		</div>
@@ -124,15 +90,17 @@
 			<!-- Add more images as needed -->
 		</ul>
 	</div>
-
-	<!-- <div class="partners">
-        <img src="./assets/images/e_commision.jpg" alt="background" class="background"/>
-        <img src="./assets/images/e_commision.jpg" alt="background" class="background"/>
-        <img src="./assets/images/e_commision.jpg" alt="background" class="background"/>
-        <img src="./assets/images/e_commision.jpg" alt="background" class="background"/>
-        <img src="./assets/images/e_commision.jpg" alt="background" class="background"/>
-        
-      </div> -->
+	<%
+	}
+    %>
+    
+    <%
+	 if (session.getAttribute("loggedAdmin") != null){
+	%>
+		<img src="./images/admin2.jpg" alt="index_bg" width="100%" />
+	<%
+	 }
+	%>
 	<div class="icons">
 		<img src="./images/vote2.png" alt="background" class="background"
 			width="100%" height="100%" />

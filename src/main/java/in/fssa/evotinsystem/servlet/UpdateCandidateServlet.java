@@ -30,6 +30,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		candidate.setName(request.getParameter("candidateName"));
 		candidate.setPartyName(request.getParameter("partyName"));
 		candidate.setImageUrl(request.getParameter("imageUrl"));
+		candidate.setProfilePic(request.getParameter("profilePic"));
 		candidate.setCreatedAt(LocalDate.parse(request.getParameter("createdAt")));
 		candidate.setUserId(Integer.parseInt(request.getParameter("candidateRegNo")));
 		candidate.setElectionId(Integer.parseInt(request.getParameter("electionId")));

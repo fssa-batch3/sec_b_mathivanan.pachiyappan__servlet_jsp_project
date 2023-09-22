@@ -7,6 +7,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Update Candidates</title>
+<link rel="stylesheet" href="./styles/style.css">
+<link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
+<link rel="stylesheet" href="./styles/interactive-style.css">
+<!--Header JSP-->
+<jsp:include page="header.jsp" />
+
 <style>
 /* Apply some basic styling to the body */
 body {
@@ -14,6 +20,22 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+}
+
+header {
+	margin-top: -7rem;
+}
+
+h1 {
+	text-align: center;
+	background-color: #007bff;
+	color: #fff;
+	padding: 10px;
+	margin-top: 7rem;
+}
+
+p.footer_text {
+	position: fixed;
 }
 
 /* Style the form container */
@@ -78,6 +100,9 @@ button[type="submit"]:hover {
 </style>
 </head>
 <body>
+
+<h1>Update Candidate</h1>
+
 <% Candidate candidate = new Candidate(); %>
 <% candidate = (Candidate)request.getAttribute("candidates"); %>
 <%String candidate_id = (String)request.getAttribute("id"); %>
@@ -85,14 +110,25 @@ button[type="submit"]:hover {
 
 	<form action="update?id=<%=id%>" method="POST">
 	    <label>Candidate Reg.No: </label>
-		<input type="number" name="candidate_regNo" required value = "<%=candidate.getCandidateId() %>" readonly/> 
+		<input type="number" name="candidateRegNo" required value = "<%=candidate.getUserId() %>" readonly/> 
 		<label>Election Id: </label>
-		<input type="number" name="election_number" required value = "<%=candidate.getElectionId() %>" readonly/>
+		<input type="number" name="electionId" required value = "<%=candidate.getElectionId() %>" />
 		<label>Candidate Name: </label>
-		<input type="text" name="candidate_name" required value = "<%=candidate.getCandidateName() %>" />
+		<input type="text" name="candidateName" required value = "<%=candidate.getName() %>" />
+		<label>Party Name: </label>
+		<input type="text" name="partyName" required value = "<%=candidate.getPartyName() %>" />
+		<label>Candidate Picture: </label>
+		<input type="text" name="profilePic" required value = "<%=candidate.getProfilePic() %>" />
+		<label>Party Symbol: </label>
+		<input type="text" name="imageUrl" required value = "<%=candidate.getImageUrl() %>" />
 		<label>Account Created: </label>
-		<input type="date" name="created_at" value = "<%=candidate.getCreatedAt() %>" readonly/>
+		<input type="date" name="createdAt" value = "<%=candidate.getCreatedAt() %>"/>
 		<button type="submit">Submit</button>
 	</form>
+	
+	<div class="icons">
+		<p class="footer_text">© Copyright BallotBox.com All rights
+			reserved 2023</p>
+	</div>
 </body>
 </html>
