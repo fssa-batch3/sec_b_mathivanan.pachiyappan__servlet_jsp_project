@@ -106,7 +106,7 @@ button.result {
 <body>
 
 	<%
-	int election_Id = (int) request.getAttribute("electionId");
+	boolean hasVoted = (boolean) request.getAttribute("hasVoted");
 	User user = (User) request.getAttribute("userData");
 	List<Vote> votes = (List<Vote>) request.getAttribute("voteList");
 	Vote vote = null;
@@ -116,12 +116,9 @@ button.result {
 	%>
 
 	<%
-	if (user != null && vote != null) {
-		System.out.println(user.getId() + "==" + vote.getUserId());
-		System.out.println(election_Id + "==" + vote.getElectionId());
-		if (election_Id != vote.getElectionId() || user.getId() != vote.getUserId()) {
+	if (!hasVoted || user.getId() != vote.getUserId()) {
 	%>
-
+	
 	<%
 	int electionId = Integer.parseInt(request.getParameter("id"));
 
@@ -224,7 +221,6 @@ button.result {
 	%>
 
 	<%
-	}
 	}
 	%>
 

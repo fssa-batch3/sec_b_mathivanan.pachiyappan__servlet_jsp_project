@@ -102,7 +102,7 @@ button[type="submit"]:hover {
 	    <label>Election Name: </label>
 		<input type="text" name="name" required /> 
 		<label>Election Date: </label>
-		<input type="date" name="date" required min = "<%=LocalDate.now() %>" />
+		<input type="date" name="date" required min="<%= LocalDate.now().plusDays(14) %>" max="<%= LocalDate.now().plusMonths(3) %>" />
 		<label>Booth Address: </label>
 		<input type="text" name="booth_address" required />
 		<label>Taluk Id: </label>

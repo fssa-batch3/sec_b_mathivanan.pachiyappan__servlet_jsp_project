@@ -36,7 +36,7 @@ public class UpdateUserServlet extends HttpServlet {
             userService.updateUser(id, user);
 
             // Redirect to the user's profile page after updating.
-            response.sendRedirect(request.getContextPath() + "/users");
+            response.sendRedirect(request.getContextPath() + "/profile");
 
         } catch (ValidationException | ServiceException e) {
             e.printStackTrace();

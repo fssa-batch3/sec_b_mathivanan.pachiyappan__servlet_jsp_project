@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="in.fssa.evotingsystem.model.User"%>
 <%@page import="in.fssa.evotingsystem.service.UserService"%>
 <%@page import="java.util.List"%>
@@ -8,9 +9,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Users List</title>
+<title>Voters List</title>
 <link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
 <link rel="stylesheet" href="./styles/interactive-style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <!--Header JSP-->
 <jsp:include page="header.jsp" />
 
@@ -22,7 +25,7 @@ body {
 }
 
 p.footer_text {
-    position: fixed;
+	position: fixed;
 }
 
 header {
@@ -83,6 +86,22 @@ button.deleteBtn {
 	padding: 0.5rem;
 	border-radius: 5px;
 }
+
+input[type="search"] {
+	align-items: ceneter;
+}
+
+div.search {
+  margin-left: 10rem;
+}
+
+button.searchBtn {
+  background: #0091ff;
+  color: white;
+  font-size: 80%;
+  font-weight: bold;
+}
+
 </style>
 </head>
 <body>
@@ -95,34 +114,46 @@ button.deleteBtn {
 	List<User> userList = newElection.getAllUsers();
 	%>
 
+	<div class="search">
+	    <i class="fa fa-search" aria-hidden="true" style="font-size: 80%;"></i><input type="text"
+				id="searchInput" placeholder="Search user...">
+		<button class = "searchBtn" onclick="searchUsers()">Search</button>
+	</div>
+
 	<table>
 		<thead>
 			<tr>
 				<th>Phone Number</th>
-				<th>Password</th>
 				<th>Address</th>
 				<th>Voter Id</th>
+				<th>Taluk Id</th>
 				<th>Status</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<%
+			
+			// Reverse the order of the userList
+			Collections.reverse(userList);
+			
 			for (User user : userList) {
-				int isActive = user.isActive() ? 0 : 1;
-				String buttonLabel = isActive == 0 ? "Block" : "Approve";
-				String buttonClass = isActive == 0 ? "approvedBtn" : "updateBtn";
-				String buttonStyle = isActive == 0 ? "background: gray;" : "background: #1ecbe1;";
+				int isApprove = user.isApprove() ? 0 : 1;
+				String buttonLabel = isApprove == 0 ? "Approved" : "Approve";
+				String buttonClass = isApprove == 0 ? "approvedBtn" : "updateBtn";
+				String buttonStyle = isApprove == 0 ? "background: gray;" : "background: #1ecbe1;";
 			%>
 			<tr>
 				<td><%=user.getPhoneNumber()%></td>
-				<td><%=user.getPassword()%></td>
 				<td><%=user.getAddress()%></td>
 				<td><%=user.getVoterId()%></td>
+				<td><%=user.getTalukId()%></td>
 				<td><span
-					style="color: <%=user.isActive() ? "green" : "red"%>; font-weight: bold;"><%=user.isActive() ? "Active" : "Deactive"%></span></td>
+					style="color: <%=user.isApprove() ? "green" : "orange"%>; font-weight: bold;"><%=user.isApprove() ? "Active" : "Pending"%></span></td>
 				<td><a href="javascript:void(0);"
-					onclick="toggleAction(<%=user.getId()%>, <%=isActive%>);">
-						<button class="<%=buttonClass%>" style="<%=buttonStyle%>">
+					onclick="toggleAction(<%=user.getId()%>, <%=isApprove%>);">
+						<button class="<%=buttonClass%>" style="<%=buttonStyle%>"
+							<%if (buttonLabel.equals("Approved")) {%> disabled <%}%>>
 							<%=buttonLabel%>
 						</button>
 				</a></td>
@@ -140,8 +171,8 @@ button.deleteBtn {
 	</div>
 
 	<script>
-         function toggleAction(userId, isActive) {
-         if (isActive === 0) {
+         function toggleAction(userId, isApprove) {
+         if (isApprove === 0) {
          // Perform the Remove action here
          window.location.href = 'user/delete?id=' + userId;
          } else {
@@ -149,6 +180,7 @@ button.deleteBtn {
          window.location.href = 'user/approve?id=' + userId;
         }
     }
-</script>
+         
+   </script>
 </body>
 </html>

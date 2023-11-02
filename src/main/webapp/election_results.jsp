@@ -1,3 +1,5 @@
+<%@page import="java.util.Collections"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="in.fssa.evotingsystem.model.Vote"%>
 <%@page import="in.fssa.evotingsystem.dto.VoteDTO"%>
 <%@page import="in.fssa.evotingsystem.service.VoteService"%>
@@ -83,8 +85,8 @@ img {
 </style>
 </head>
 <body>
-    
-    <%
+
+	<%
 	User user = (User) request.getSession().getAttribute("loggedUser");
 	%>
 
@@ -102,7 +104,7 @@ img {
 
 	<h1><%=electionName%></h1>
 
-	<h2 style="color: red;">Live Polling</h2>
+	<h2 style="color: red;">Result</h2>
 	<table>
 		<thead>
 			<tr>
@@ -128,9 +130,11 @@ img {
 					for (VoteDTO votedCandidate : candidateList) {
 				if (votedCandidate.getElectionId() == electionId && votedCandidate.isActive() == true) {
 			%>
+
 			<tr>
 				<td><img src="<%=votedCandidate.getCandidatePicture()%>"
-					alt="party_symbols" style="max-width: 7rem; border-radius: 1rem;" /></td>
+					alt="candidate_profile"
+					style="max-width: 7rem; border-radius: 1rem;" /></td>
 				<td><%=votedCandidate.getCandidateName()%></td>
 				<td><%=votedCandidate.getPartyName()%></td>
 				<td><%=votedCandidate.getVoteCount()%></td>
@@ -147,10 +151,32 @@ img {
 			%>
 		</tbody>
 	</table>
-	<h2 style="margin-top: -6rem;">
+
+	<%
+	LocalDate inputDate = election.getElectionDate();
+
+	LocalDate currentDate = LocalDate.now();
+	
+
+	if (inputDate.isEqual(currentDate)) {
+	%>
+	<h2>
 		Leading:
 		<%=winningCandidateName%>
 	</h2>
+	<%
+	} else {
+	%>
+	<h2>
+		Winner:
+		<%=winningCandidateName%>
+	</h2>
+	<%
+	} 
+	%>
+	
+
+
 	<%
 	}
 	} catch (Exception e) {
@@ -164,6 +190,13 @@ img {
 	}
 	%>
 
-	
+	<script>
+		// Function to generate a random vote count within a specified range
+		function getRandomVoteCount() {
+			return Math.floor(Math.random() * (500 - 1 + 1) + 1); // Generates a random number between 1 and 500
+		}
+	</script>
+
+
 </body>
 </html>

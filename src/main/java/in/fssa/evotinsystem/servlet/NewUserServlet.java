@@ -19,5 +19,4 @@ public class NewUserServlet extends HttpServlet {
 		RequestDispatcher requ = request.getRequestDispatcher("/user_register.jsp");
 		requ.forward(request, response);
 	}
-
 }

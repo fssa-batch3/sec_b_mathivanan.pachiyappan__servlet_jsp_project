@@ -98,10 +98,8 @@ button[type="submit"]:hover {
 
     <h1>Add New Candidate</h1>
 	<form action="create" method="POST">
-		<label>Candidate Reg.No:</label> <input type="number"
-			name="candidateRegNo" autofocus required /> 
 			<label>Candidate Name:</label>
-			<input type="text" name="candidateName" required /> 
+			<input type="text" name="candidateName" autofocus required /> 
 			<label>Election ID:</label> 
 			<input type="number" name="electionId" required /> 
 			<label>Party Name:</label> 
@@ -109,7 +107,7 @@ button[type="submit"]:hover {
 			<label>Candidate Picture:</label> 
 			<input type="text" name="profilePic" required /> 
 			<label>Party Symbol:</label> 
-			<input type="text" name="imageUrl" /> 
+			<input type="text" name="imageUrl" required /> 
 			<label>Created At:</label> 
 			<input type="date" name="createdAt" required
 			min="<%=LocalDate.now()%>" />

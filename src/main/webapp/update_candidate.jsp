@@ -109,8 +109,6 @@ button[type="submit"]:hover {
 <%int id = Integer.parseInt(candidate_id); %>
 
 	<form action="update?id=<%=id%>" method="POST">
-	    <label>Candidate Reg.No: </label>
-		<input type="number" name="candidateRegNo" required value = "<%=candidate.getUserId() %>" readonly/> 
 		<label>Election Id: </label>
 		<input type="number" name="electionId" required value = "<%=candidate.getElectionId() %>" />
 		<label>Candidate Name: </label>

@@ -1,3 +1,4 @@
+<%@page import="in.fssa.evotingsystem.model.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -15,10 +16,10 @@
 
 <style>
 body {
-	background-image: url(./images/login_bg.jpg);
+	background-image: url(./images/Login_cuate.png);
 	background-attachment: fixed;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 }
 
 header {
@@ -36,6 +37,7 @@ h2 {
 	max-width: 400px;
 	margin: auto;
 	margin-top: 9rem;
+	margin-right: 9rem;
 	padding: 20px;
 	width: 100%;
 	border: 1px solid #ccc;
@@ -83,6 +85,20 @@ h2 {
 .login-button:hover {
 	background-color: #0056b3;
 }
+
+span {
+	font-weight: bold;
+	font-family: sans-serif;
+	background-color: #9624E210;
+	font-size: 90%;
+}
+
+img.form_logo {
+	margin-left: 40%;
+	margin-bottom: -1rem;
+	width: 20%;
+}
+
 </style>
 </head>
 
@@ -98,32 +114,75 @@ h2 {
 	</header>
 
 	<div class="login-container">
+	     <img class="form_logo" src="./images/bb_logo.png" alt="logo" />
 		<h2>Login</h2>
 
 		<c:if test="${not empty errorMessage}">
 			<p
-				style="color: #85a88c; font-weight: bold; text-align: center; background-color: #d4edda; border-radius: 4px; padding: 0.5rem;">
+				style="color: #f30c0f; font-weight: bold; text-align: center; background-color: #fcb5b6; border-radius: 4px; padding: 0.5rem;">
 				${errorMessage}</p>
 		</c:if>
 
-		<form action="userlogin" method="post">
+		<form action="userlogin" method="post" onsubmit="loginUser()">
 			<div class="input-container">
 				<i class="fas fa-mobile"></i> <input type="tel"
-					placeholder="Mobile Number" name="phone_number" autofocus required>
+					placeholder="Mobile Number" name="phone_number" value="${empty phoneNumber ? '' : phoneNumber}" id="phoneNo" autofocus />
+				<span id="phoneNoError" style="color: red;"></span>
 			</div>
+			
+			 
 			<div class="input-container">
-				<i class="fas fa-lock"></i> <input type="password"
-					placeholder="Password" name="password" required>
+				<i class="fas fa-lock"></i> <input type="password" value="${empty password ? '' : password}" placeholder="Password" name="password" id="password" />
+				<span id="passwordError" style="color: red;"></span>
 			</div>
+			 
 			<p style="text-align: center;">Or</p>
 			<p style="text-align: center;">
-				Click here to <a href="<%=request.getContextPath() + "/create"%>">Register
-					User</a>
+				Don't have an account? <a href="<%=request.getContextPath() + "/user/new"%>">Register</a>
 			</p>
 			<button class="login-button" type="submit">Login</button>
 		</form>
 	</div>
+<script>
+    function loginUser(){
+    	// Get form inputs
+    	const phoneNoInput = document.getElementById("phoneNo");
+        const passwordInput = document.getElementById("password");
+        
+     // Get error message elements
+        const phoneNoError = document.getElementById("phoneNoError");
+        const passwordError = document.getElementById("passwordError");
+        
+     // Initialize a flag to check if the form is valid
+        let isValid = true;
 
+        // Reset previous error messages
+        phoneNoError.textContent = "";
+        passwordError.textContent = "";
+        
+     // Perform validation
+        if (phoneNoInput.value.trim() === "") {
+            phoneNoError.textContent = "Phone Number is required";
+            isValid = false;
+        } else if (!/^[6-9]\d{9}$/.test(phoneNoInput.value.trim())) {
+            phoneNoError.textContent = "Phone Number must start with a digit from 6 to 9 and be 10 digits in total";
+            isValid = false;
+        }
+
+        if (passwordInput.value.trim() === "") {
+            passwordError.textContent = "Password is required";
+            isValid = false;
+        } else if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/.test(passwordInput.value.trim())) {
+            passwordError.textContent = "Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long";
+            isValid = false;
+        }
+        
+     // If the form is not valid, prevent submission
+        if (!isValid) {
+            event.preventDefault();
+        }
+    }
+</script>
 	
 
 </body>

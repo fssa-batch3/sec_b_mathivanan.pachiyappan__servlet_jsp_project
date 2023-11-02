@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="in.fssa.evotingsystem.model.Vote"%>
 <%@page import="in.fssa.evotingsystem.dto.VoteDTO"%>
 <%@page import="in.fssa.evotingsystem.service.VoteService"%>
@@ -83,8 +84,8 @@ img {
 </style>
 </head>
 <body>
-    
-    <%
+
+	<%
 	User user = (User) request.getSession().getAttribute("loggedUser");
 	%>
 
@@ -102,7 +103,7 @@ img {
 
 	<h1><%=electionName%></h1>
 
-	<h2 style="color: red;">Live Polling</h2>
+	<h2 style="color: red;">Result</h2>
 	<table>
 		<thead>
 			<tr>
@@ -110,6 +111,7 @@ img {
 				<th>Candidate Name</th>
 				<th>Party</th>
 				<th>Total Votes</th>
+				<th>Timing</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -130,10 +132,12 @@ img {
 			%>
 			<tr>
 				<td><img src="<%=votedCandidate.getCandidatePicture()%>"
-					alt="party_symbols" style="max-width: 7rem; border-radius: 1rem;" /></td>
+					alt="candidate_profile"
+					style="max-width: 7rem; border-radius: 1rem;" /></td>
 				<td><%=votedCandidate.getCandidateName()%></td>
 				<td><%=votedCandidate.getPartyName()%></td>
 				<td><%=votedCandidate.getVoteCount()%></td>
+				<td><%=votedCandidate.getVoteTimeStamp()%></td>
 			</tr>
 			<%
 			// Check if this candidate has more votes than the current winning candidate
@@ -147,10 +151,39 @@ img {
 			%>
 		</tbody>
 	</table>
-	<h2 style="margin-top: -6rem;">
+	<%
+	
+	LocalDate inputDate = election.getElectionDate();
+	LocalDate currentDate = LocalDate.now();
+	
+	if (inputDate.isAfter(currentDate)) {
+	%>
+	<h2
+		style="margin-top: 16.6rem; position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
+		Winner:
+		<%=winningCandidateName%>
+	</h2>
+	<%
+	} else if (inputDate.isBefore(currentDate)) {
+	%>
+	<h2
+		style="margin-top: 16.6rem; position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
 		Leading:
 		<%=winningCandidateName%>
 	</h2>
+	<%
+	} else {
+	%>
+	<h2
+		style="margin-top: 16.6rem; position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
+		Leading:
+		<%=winningCandidateName%>
+	</h2>
+	<%
+	}
+	%>
+
+
 	<%
 	}
 	} catch (Exception e) {
@@ -164,6 +197,6 @@ img {
 	}
 	%>
 
-	
+
 </body>
 </html>

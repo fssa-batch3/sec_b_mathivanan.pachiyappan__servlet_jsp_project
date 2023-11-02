@@ -1,3 +1,7 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="in.fssa.evotingsystem.model.Taluk"%>
+<%@page import="in.fssa.evotingsystem.service.TalukService"%>
 <%@page import="in.fssa.evotingsystem.model.User"%>
 <%@page import="in.fssa.evotingsystem.model.Election"%>
 <%@page import="in.fssa.evotingsystem.service.ElectionService"%>
@@ -110,6 +114,9 @@ tr:hover {
 	<%
 	ElectionService newElection = new ElectionService();
 	List<Election> electionList = newElection.getAllElections();
+	
+	TalukService newTaluk = new TalukService();
+	List<Taluk> talukList = newTaluk.getAllTaluk();
 
 	// Check if a user is logged in and get the user object accordingly
 	User user = (User) session.getAttribute("loggedUser");
@@ -123,23 +130,67 @@ tr:hover {
 				<th>Election Name</th>
 				<th>Election Date</th>
 				<th>Booth Address</th>
+				<th>Constituency</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<%
 			if (user != null) {
 				int userTalukId = user.getTalukId();
+				
+				// Reverse the electionList using Collections.reverse
+			    java.util.Collections.reverse(electionList);
+				
 				for (Election election : electionList) {
 					if (election.getTalukId() == userTalukId) {
+						LocalDate inputDate = election.getElectionDate();
+						LocalDate currentDate = LocalDate.now();
+						
+						String talukName = ""; // Initialize with an empty string
+	                    for (Taluk taluk : talukList) {
+	                        if (taluk.getId() == election.getTalukId()) {
+	                            talukName = taluk.getTalukName();
+	                            break; // Stop searching once the taluk name is found
+	                        }
+	                    }
 			%>
-			<tr
-				onclick="location.href='<%=request.getContextPath() + "/voting?id=" + election.getId()%>'"
-				style="cursor: pointer;">
+			<tr onclick="<%if (inputDate.isBefore(currentDate)) {
+	        // Expired Elections - Disable link
+	        %>
+            location.href='<%=request.getContextPath() + "/results?electionId=" + election.getId()%>';
+            <%} else if (inputDate.isAfter(currentDate)) {
+			// Upcoming Elections - Enable link%>
+            location.href='#';
+            <%} else {
+            // Election Date is Equal to Current Date - Disable link%>
+            location.href='<%=request.getContextPath() + "/voting?id=" + election.getId()%>';
+            <%}%>"
+			style="cursor: <%if (inputDate.isBefore(currentDate)) {
+			// Expired Elections - Change cursor to not-allowed%>
+            not-allowed;
+            <%} else {
+			// Upcoming Elections - Change cursor to pointer%>
+            pointer;
+            <%}%>">
 				<td><%=election.getElectionName()%></td>
 				<td><%=election.getElectionDate()%></td>
 				<td><%=election.getBoothAddress()%></td>
-				<td><i class='far fa-arrow-alt-circle-right'
-					style='font-size: 28px; color: green'></i></td>
+				<td><%=talukName%></td>
+				<td>
+					<%
+				if(inputDate.isBefore(currentDate)){
+				%>
+					<p style="color: red; font-weight: bold;">Expired Election</p> <%
+				}else if(inputDate.isAfter(currentDate)){
+			    %>
+					<p style="color: #0091ff; font-weight: bold;">Upcoming Election</p> <%
+				}else{
+				%> <i class='far fa-arrow-alt-circle-right'
+					style='font-size: 28px; color: green'></i> <%
+				}
+				%>
+				</td>
 			</tr>
 			<%
 			}

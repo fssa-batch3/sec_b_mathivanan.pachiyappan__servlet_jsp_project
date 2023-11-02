@@ -8,30 +8,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Profile</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="./styles/style.css">
 <link rel="icon" href="./images/bb_logo.png" type="image/x-icon">
 <link rel="stylesheet" href="./styles/interactive-style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--Header JSP-->
 <jsp:include page="header.jsp" />
 
 <style>
 body {
 	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
+	background-image: url(./images/login_bg.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .container {
 	max-width: 600px;
 	margin: 0 auto;
+	margin-top: 5rem;
 	padding: 20px;
-	background-color: #fff;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	border: 1px solid #ccc;
+	background-color: rgba(186, 177, 177, 0.5);
+}
+
+header {
+	margin-top: -5rem;
 }
 
 h1 {
-	text-align: center;
+   font-family: "Poppins", sans-serif;
+	font-size: 250%;
+	margin: 1rem;
+	color: black;
+}
+img {
+	font-family: "Poppins", sans-serif;
+	font-size: 250%;
+	margin: 1rem;
+	color: black;
 }
 
 .profile {
@@ -52,7 +69,7 @@ h1 {
 }
 
 .profile p {
-	color: #777;
+	color: black;
 }
 
 .edit-button {
@@ -63,6 +80,7 @@ h1 {
 	border: none;
 	padding: 10px 20px;
 	border-radius: 5px;
+	font-weight: bold;
 	cursor: pointer;
 }
 
@@ -86,68 +104,93 @@ h1 {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+div.icons {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+table {
+	border-collapse: collapse;
+	width: 200%;
+	max-width: 400px; /* Adjust the maximum width as needed */
+	border: 1px solid #ccc;
+	background-color: rgba(186, 177, 177, 0.5);
+	margin: 10px auto; /* Add some margin for spacing */
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #333; /* Header background color */
+	color: #fff; /* Header text color */
+}
+
+/* Add hover effect to table rows */
+tr:hover {
+	background-color: #ddd;
+}
 </style>
 </head>
 <body>
-	<%
-	if (session.getAttribute("loggedUser") == null) {
-	%>
-	<header>
-		<div class="logo_text">
-			<img src="./images/bb_logo.png" alt="e_commison-logo" width="10%"
-				height="10%" style="border-radius: 1.5rem;" /> <a
-				href="<%=request.getContextPath() + "/index"%>">
-				<p>BallotBox</p>
-			</a>
-		</div>
-
-		<div>
-			<a href="<%=request.getContextPath() + "/userlogin"%>"><button>Sign-In</button></a>
-		</div>
-	</header>
-	<%
-	} else {
-	%>
-	<!-- Header after login -->
-	<header>
-		<div class="logo_text">
-			<img src="./images/bb_logo.png" alt="e_commison-logo" width="10%"
-				height="10%" style="border-radius: 1.5rem;" /> <a
-				href="<%=request.getContextPath() + "/index"%>">
-				<p>BallotBox</p>
-			</a>
-		</div>
-
-		<div>
-			<a href="<%=request.getContextPath() + "/select"%>"><button>Election</button></a>
-			<a href="<%=request.getContextPath() + "/userprofile"%>"><button>Profile</button></a>
-			<a href="<%=request.getContextPath() + "/userlogout"%>"><button>Logout</button></a>
-		</div>
-	</header>
-	<%
-	}
-	%>
-
 	<%
 	User user = (User) request.getSession().getAttribute("loggedUser");
 	%>
 
 	<div class="container">
-		<h1>User Profile</h1>
 		<div class="profile">
-			<img src="./images/profile_upload.jpg" alt="User Profile Picture">
+			<img src="./images/votesymbol.png" alt="User Profile Picture">
 			<!-- Replace with your default image URL -->
-			<h2>User Profile</h2>
-			<p>
-				Phone Number:
-				<%=user.getPhoneNumber()%></p>
-			<p>
-				Address:
-				<%=user.getAddress()%></p>
-			<p>
-				Taluk No:<%=user.getTalukId()%></p>
+			<h1>User Profile</h1>
+			<!-- Table 1: User Information -->
+			<table>
+				<tr>
+					<th>Field</th>
+					<th>Value</th>
+				</tr>
+				<tr>
+					<td>Phone Number</td>
+					<td><%=user.getPhoneNumber()%></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td>********</td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><%=user.getAddress()%></td>
+				</tr>
+			</table>
+
+			<!-- Table 2: Additional Information -->
+			<h3>Additional Fields</h3>
+			<table>
+				<tr>
+					<th>Field</th>
+					<th>Value</th>
+				</tr>
+				<tr>
+					<td>Voter Id No</td>
+					<td><%=user.getVoterId()%></td>
+				</tr>
+				<tr>
+					<td>Taluk No</td>
+					<td><%=user.getTalukId()%></td>
+				</tr>
+			</table>
+
 		</div>
 		<a href="user/edit?id=<%=user.getId()%>"><button
 				class="edit-button">Edit Profile</button></a>
+	</div>
+
+	<div class="icons">
+		<p class="footer_text">© Copyright BallotBox.com All rights
+			reserved 2023</p>
+	</div>
 </body>
 </html>

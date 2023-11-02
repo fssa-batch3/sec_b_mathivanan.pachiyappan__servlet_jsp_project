@@ -93,7 +93,7 @@ button.deleteBtn {
 	font-size: 110%;
 	top: 1;
 	color: white;
-	background-image: linear-gradient(blueviolet, #ff589e);
+	background-image: linear-gradient(blue, #0091ff);
 	padding: 0.3em;
 	width: 7%;
 	border-bottom-right-radius: 1em;
@@ -111,16 +111,21 @@ button.deleteBtn {
 	%>
 
 	<h2>Select Election</h2>
+	
 	<p class="add_new">
 		<a href="<%=request.getContextPath() + "/election/new"%>">Add New<i
 			class="fa fa-plus-circle"></i></a>
 	</p>
+	
 	<table>
 		<thead>
 			<tr>
+			    <th>Election Id</th>
 				<th>Election Name</th>
 				<th>Election Date</th>
 				<th>Booth Address</th>
+				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -128,6 +133,7 @@ button.deleteBtn {
 			for (Election election : electionList) {
 			%>
 			<tr>
+			    <td><%=election.getId()%></td>
 				<td><%=election.getElectionName()%></td>
 				<td><%=election.getElectionDate()%></td>
 				<td><%=election.getBoothAddress()%></td>
@@ -142,6 +148,8 @@ button.deleteBtn {
 			%>
 		</tbody>
 	</table>
+	
+	
 	<div class="icons">
 		<p class="footer_text">© Copyright BallotBox.com All rights
 			reserved 2023</p>

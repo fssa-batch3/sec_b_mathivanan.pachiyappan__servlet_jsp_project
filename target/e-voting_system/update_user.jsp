@@ -124,6 +124,7 @@ button[type="submit"]:hover {
 <%String user_id = (String)request.getAttribute("id"); %>
 <%int id = Integer.parseInt(user_id); %>
 
+<h1>Update Profile</h1>
 	<form action="update?id=<%=id%>" method="POST">
 	    <label>Phone Number: </label>
 		<input type="tel" name="phone_number" required value = "<%=user.getPhoneNumber() %>" readonly/> 
@@ -134,7 +135,7 @@ button[type="submit"]:hover {
 		<label>Voter Id: </label>
 		<input type="number" name="voter_number" required value = "<%=user.getVoterId() %>" readonly/>
 		<label>Taluk Id: </label>
-		<input type="number" name="taluk_number" required value = "<%=user.getTalukId() %>" readonly/>
+		<input type="number" name="taluk_number" required value = "<%=user.getTalukId() %>" />
 		<button type="submit">Submit</button>
 	</form>
 	

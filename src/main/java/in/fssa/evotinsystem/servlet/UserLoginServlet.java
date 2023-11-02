@@ -54,9 +54,11 @@ public class UserLoginServlet extends HttpServlet {
             // Handle invalid phone number format
             request.setAttribute("errorMessage", "Invalid phone number format");
             request.getRequestDispatcher("/user_login.jsp").forward(request, response);
-        } catch (ValidationException | ServiceException e) {
+        } catch (Exception e) {
             // Handle validation or service exceptions
             request.setAttribute("errorMessage", e.getMessage());
+            request.setAttribute("phoneNumber", phoneNumber);
+            request.setAttribute("password", password);
             request.getRequestDispatcher("/user_login.jsp").forward(request, response);
         }
     }

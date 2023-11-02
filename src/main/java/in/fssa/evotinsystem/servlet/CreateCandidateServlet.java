@@ -24,7 +24,6 @@ public class CreateCandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String candidateName = request.getParameter("candidateName");
-        String candidateRegno = request.getParameter("candidateRegNo");
         String electionId = request.getParameter("electionId");
         String partyName = request.getParameter("partyName");
         String imageUrl = request.getParameter("imageUrl");
@@ -33,7 +32,6 @@ public class CreateCandidateServlet extends HttpServlet {
 
         Candidate candidate = new Candidate();
         candidate.setName(candidateName);
-        candidate.setUserId(Integer.parseInt(candidateRegno));
         candidate.setElectionId(Integer.parseInt(electionId));
         candidate.setPartyName(partyName);
         candidate.setImageUrl(imageUrl);

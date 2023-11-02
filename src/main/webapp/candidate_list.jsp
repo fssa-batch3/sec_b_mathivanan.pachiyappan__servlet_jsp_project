@@ -93,7 +93,7 @@ button.deleteBtn {
 	font-size: 110%;
 	top: 1;
 	color: white;
-	background-image: linear-gradient(blueviolet, #ff589e);
+	background-image: linear-gradient(blue, #0091ff);
 	padding: 0.3em;
 	width: 7%;
 	border-bottom-right-radius: 1em;
@@ -104,12 +104,14 @@ button.deleteBtn {
 <body>
 
 	<h1>Candidate List</h1>
+
+	<h2>Select Candidate</h2>
+	
 	<p class="add_new">
 		<a href="<%=request.getContextPath() + "/candidate/new"%>">Add New<i
 			class="fa fa-plus-circle"></i></a>
 	</p>
-
-	<h2>Select Candidate</h2>
+	
 	<%
 	CandidateService newCandidate = new CandidateService();
 	List<Candidate> candidateList = newCandidate.getAllCandidates();
@@ -132,7 +134,7 @@ button.deleteBtn {
 			for (Candidate candidate : candidateList) {
 			%>
 			<tr>
-				<td><%=candidate.getUserId()%></td>
+				<td><%=candidate.getId()%></td>
 				<td><%=candidate.getElectionId()%></td>
 				<td><img src="<%=candidate.getProfilePic() %>" alt="candidate_picture"
 					style="max-width: 7rem; border-radius: 1rem;" /></td>

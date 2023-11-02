@@ -18,16 +18,9 @@ import in.fssa.evotingsystem.service.UserService;
  * Servlet implementation class AddElections
  */
 
-@WebServlet("/create")
+@WebServlet("/user/create")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/user_register.jsp");
-		dispatcher.forward(request, response);
-	}
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,10 +58,17 @@ public class CreateUserServlet extends HttpServlet {
             // Handle invalid phone number format
             request.setAttribute("errorMessage", "Invalid phone number format");
             request.getRequestDispatcher("/user_login.jsp").forward(request, response);
-        } catch (ValidationException | ServiceException e) {
+        } catch (Exception e) {
             // Handle validation or service exceptions
         	e.printStackTrace();
-            throw new ServletException(e.getMessage());
+        	request.setAttribute("errorMessage", e.getMessage());
+        	request.setAttribute("phoneNumber", phoneNumber);
+        	request.setAttribute("password", password);
+        	request.setAttribute("address", address);
+        	request.setAttribute("voterId", voterId);
+        	request.setAttribute("talukId", talukId);
+            request.getRequestDispatcher("/user_register.jsp").forward(request, response);
+         
         }
         
     }
